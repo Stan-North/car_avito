@@ -10,14 +10,15 @@
 	</parent>
 	<groupId>com.javaacademy</groupId>
 	<artifactId>car-avito</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>car-avito</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>17</java.version>
 		<checkstyle-plugin.version>3.3.0</checkstyle-plugin.version>
-		<checstyle.version>10.17.0</checstyle.version>
+		<checkstyle.version>10.17.0</checkstyle.version>
+		<checkstyle.puppycrawl.version>10.14.1</checkstyle.puppycrawl.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -42,12 +43,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.4.0</version>
+				<version>${checkstyle-plugin.version}</version>
 				<dependencies>
 					<dependency>
 						<groupId>com.puppycrawl.tools</groupId>
 						<artifactId>checkstyle</artifactId>
-						<version>10.14.1</version>
+						<version>${checkstyle.puppycrawl.version}</version>
 					</dependency>
 				</dependencies>
 				<configuration>
