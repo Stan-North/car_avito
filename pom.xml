@@ -52,7 +52,7 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<configLocation>google_checks.xml</configLocation>
+					<configLocation>my_checkstyle.xml.xml</configLocation>
 					<consoleOutput>true</consoleOutput>
 					<failsOnError>true</failsOnError>
 					<failOnViolation>true</failOnViolation>
