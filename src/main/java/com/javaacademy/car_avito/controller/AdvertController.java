@@ -1,6 +1,8 @@
 package com.javaacademy.car_avito.controller;
 
 import com.javaacademy.car_avito.advert.Advert;
+import com.javaacademy.car_avito.advert.Brand;
+import com.javaacademy.car_avito.advert.Color;
 import com.javaacademy.car_avito.service.AdvertStorage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +13,7 @@ import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/advert")
+@RequestMapping("/adverts")
 public class AdvertController {
     private final AdvertStorage advertStorage;
 
@@ -20,8 +22,8 @@ public class AdvertController {
         advertStorage.save(advert);
     }
 
-    @GetMapping("/brand/{brand}")
-    public List<Advert> getAllByBrand(@PathVariable String brand) {
+    @GetMapping("/brands/{brand}")
+    public List<Advert> getAllByBrand(@PathVariable Brand brand) {
        return advertStorage.getAll()
                .stream()
                .filter(advert -> Objects.equals(advert.getBrand(), brand))
@@ -40,8 +42,8 @@ public class AdvertController {
 
     @GetMapping("/search")
     public List<Advert> getByParams(
-            @RequestParam(required = false) String brand,
-            @RequestParam(required = false) String color,
+            @RequestParam(required = false) Brand brand,
+            @RequestParam(required = false) Color color,
             @RequestParam(required = false) BigDecimal price) {
         return advertStorage.getByParams(brand, color, price);
     }

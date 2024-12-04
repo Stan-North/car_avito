@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Builder
 public class Advert {
     private Integer id;
-    private String brand;
-    private String color;
+    private Brand brand;
+    private Color color;
     private BigDecimal price;
 }

@@ -1,6 +1,8 @@
 package com.javaacademy.car_avito.service;
 
 import com.javaacademy.car_avito.advert.Advert;
+import com.javaacademy.car_avito.advert.Brand;
+import com.javaacademy.car_avito.advert.Color;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -33,7 +35,7 @@ public class AdvertStorage {
         return data.remove(id) != null;
     }
 
-    public List<Advert> getByParams(String brand, String color, BigDecimal price) {
+    public List<Advert> getByParams(Brand brand, Color color, BigDecimal price) {
         List<Advert> temp = data.values().stream().toList();
         if (brand != null) {
             temp = filterByBrand(brand, temp);
@@ -47,13 +49,13 @@ public class AdvertStorage {
         return temp;
     }
 
-    private List<Advert> filterByBrand(String brand, List<Advert> adverts) {
+    private List<Advert> filterByBrand(Brand brand, List<Advert> adverts) {
         return adverts.stream()
                 .filter(advert -> Objects.equals(brand, advert.getBrand()))
                 .toList();
     }
 
-    private List<Advert> filterByColor(String color, List<Advert> adverts) {
+    private List<Advert> filterByColor(Color color, List<Advert> adverts) {
         return adverts.stream()
                 .filter(advert -> Objects.equals(color, advert.getColor()))
                 .toList();
