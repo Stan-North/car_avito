@@ -1,8 +1,6 @@
 package com.javaacademy.car_avito.service;
 
 import com.javaacademy.car_avito.advert.Advert;
-import com.javaacademy.car_avito.advert.Brand;
-import com.javaacademy.car_avito.advert.Color;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -35,35 +33,52 @@ public class AdvertStorage {
         return data.remove(id) != null;
     }
 
-    public List<Advert> getByParams(Brand brand, Color color, BigDecimal price) {
+    public List<Advert> getByParams(String brand, String color, BigDecimal price) {
         List<Advert> temp = data.values().stream().toList();
-        if (brand != null) {
-            temp = filterByBrand(brand, temp);
-        }
-        if (color != null) {
-            temp = filterByColor(color, temp);
-        }
-        if (price != null) {
-            temp = filterByPrice(price, temp);
-            }
+        temp = filterByBrand(brand, temp);
+        temp = filterByColor(color, temp);
+        temp = filterByPrice(price, temp);
         return temp;
     }
 
-    private List<Advert> filterByBrand(Brand brand, List<Advert> adverts) {
-        return adverts.stream()
-                .filter(advert -> Objects.equals(brand, advert.getBrand()))
-                .toList();
+    private List<Advert> filterByBrand(String brand, List<Advert> adverts) {
+        if ("null".equals(brand)) {
+            return adverts.stream()
+                    .filter(advert -> advert.getBrand() == null)
+                    .toList();
+        } else if (brand != null) {
+            return adverts.stream()
+                    .filter(advert -> Objects.equals(brand, advert.getBrand()))
+                    .toList();
+        }
+        return adverts;
     }
 
-    private List<Advert> filterByColor(Color color, List<Advert> adverts) {
-        return adverts.stream()
-                .filter(advert -> Objects.equals(color, advert.getColor()))
-                .toList();
+
+    private List<Advert> filterByColor(String color, List<Advert> adverts) {
+        if ("null".equals(color)) {
+            return adverts.stream()
+                    .filter(advert -> advert.getColor() == null)
+                    .toList();
+        } else if (color != null) {
+            return adverts.stream()
+                    .filter(advert -> Objects.equals(color, advert.getColor()))
+                    .toList();
+        }
+        return adverts;
     }
+
 
     private List<Advert> filterByPrice(BigDecimal price, List<Advert> adverts) {
-        return adverts.stream()
-                .filter(advert -> Objects.equals(price, advert.getPrice()))
-                .toList();
+        if ("null".equals(price)) {
+            return adverts.stream()
+                    .filter(advert -> advert.getPrice() == null)
+                    .toList();
+        } else if (price != null) {
+            return adverts.stream()
+                    .filter(advert -> Objects.equals(price, advert.getPrice()))
+                    .toList();
+        }
+        return adverts;
     }
 }

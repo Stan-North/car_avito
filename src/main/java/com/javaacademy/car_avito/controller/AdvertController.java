@@ -1,11 +1,16 @@
 package com.javaacademy.car_avito.controller;
 
 import com.javaacademy.car_avito.advert.Advert;
-import com.javaacademy.car_avito.advert.Brand;
-import com.javaacademy.car_avito.advert.Color;
 import com.javaacademy.car_avito.service.AdvertStorage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,7 +28,7 @@ public class AdvertController {
     }
 
     @GetMapping("/brands/{brand}")
-    public List<Advert> getAllByBrand(@PathVariable Brand brand) {
+    public List<Advert> getAllByBrand(@PathVariable String brand) {
        return advertStorage.getAll()
                .stream()
                .filter(advert -> Objects.equals(advert.getBrand(), brand))
@@ -42,8 +47,8 @@ public class AdvertController {
 
     @GetMapping("/search")
     public List<Advert> getByParams(
-            @RequestParam(required = false) Brand brand,
-            @RequestParam(required = false) Color color,
+            @RequestParam(required = false) String brand,
+            @RequestParam(required = false) String color,
             @RequestParam(required = false) BigDecimal price) {
         return advertStorage.getByParams(brand, color, price);
     }
